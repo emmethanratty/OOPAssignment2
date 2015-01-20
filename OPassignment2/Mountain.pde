@@ -19,7 +19,7 @@ class Mountain
   
   void move()
   {
-     mountainX -= 4;
+     mountainX -= .1f;
   }
   
   void reset()

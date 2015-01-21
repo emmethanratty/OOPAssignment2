@@ -11,6 +11,7 @@ class Rocky
   float gravityF = 5;
   float rockyISize;
   float jumpH;
+  float rollspeed = 10;
   
   
   
@@ -19,7 +20,7 @@ class Rocky
    {
      
      this.gHeight = gHeight;
-     rockyY = this.gHeight - rockyH;
+     rockyY = gHeight - rockyH/2;
      jumpH = gHeight - 200;
    }
  
@@ -35,7 +36,7 @@ class Rocky
      {
         rockyY += gravityF; 
      }
-     if(rockyY == gHeight - rockyH)
+     if(rockyY == gHeight - rockyH/2)
      {
        nofloor = false;
      }
@@ -50,6 +51,7 @@ class Rocky
         if(rockyX > 0)
         {
           rockyX -= 3;
+          rollspeed = 5;
         }       
       }//end left if 
       if (keyCode == RIGHT)
@@ -57,6 +59,14 @@ class Rocky
         if(rockyX < width)
         {
           rockyX += 3;
+          rollspeed = 15;
+        }       
+      }//end left if 
+      if (keyCode == DOWN)
+      {   
+        if(rockyX < width)
+        {
+          rollspeed = 10;
         }       
       }//end left if 
    }

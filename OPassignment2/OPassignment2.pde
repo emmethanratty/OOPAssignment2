@@ -41,13 +41,13 @@ void draw()
   
     image(GrassI,grass.grassX,gHeight-grass.grassH,grass.grassW,grass.grassH);
   
-   counter+=10;
+   counter+=rocky.rollspeed;
 
    translate(rocky.rockyX, rocky.rockyY);
    rotate(counter*TWO_PI/360);
    translate(-rocky.rockyW/2, -rocky.rockyW/2);
    
-  image(RockyI,0,0);  
+  image(RockyI,0,0,rocky.rockyW,rocky.rockyH);  
   
   
   rocky.run();

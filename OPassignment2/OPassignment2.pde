@@ -4,8 +4,10 @@ PImage TreeI;
 PImage MountainI;
 PImage GrassI;
 PImage RockyI;
+PImage RockyEye;
 
 int gHeight = 458;
+int ii = 1;
 float i = 0;
 float counter;
 
@@ -24,7 +26,8 @@ void setup()
    TreeI = loadImage("tree.png");
    MountainI = loadImage("mountain.png");
    GrassI = loadImage("grass.png");
-   RockyI = loadImage("rsz_rockyv2.png");
+   RockyI = loadImage("rsz_rockyv3.png");
+   RockyEye = loadImage("rsz_1rockyeye.png");
    
 }  
 
@@ -40,6 +43,7 @@ void draw()
     image(TreeI,tree.treeX,gHeight-tree.treeH,tree.treeW,tree.treeH);
   
     image(GrassI,grass.grassX,gHeight-grass.grassH,grass.grassW,grass.grassH);
+    image(RockyI,rocky.rockyX - rocky.rockyW/2,rocky.rockyY - rocky.rockyH/2,rocky.rockyW,rocky.rockyH);  
   
    counter+=rocky.rollspeed;
 
@@ -47,7 +51,7 @@ void draw()
    rotate(counter*TWO_PI/360);
    translate(-rocky.rockyW/2, -rocky.rockyW/2);
    
-  image(RockyI,0,0,rocky.rockyW,rocky.rockyH);  
+  image(RockyEye,0,0,rocky.rockyW,rocky.rockyH);  
   
   
   rocky.run();
@@ -58,17 +62,22 @@ void draw()
 
 void keyPressed()
 {
- if (keyCode == ' ')
-    {   
-      if(rocky.rockyY > rocky.jumpH)
-      {  
-         rocky.rockyY -= 5;
-      } 
-      else
-      {
-        rocky.nofloor = true;
-      }       
-    } 
+   if (keyCode == ' ')
+   { 
+       
+        if(rocky.rockyY > rocky.jumpH)
+        {  
+           rocky.rockyY -= 5;
+        } 
+        else if(rocky.rockyY < gHeight)
+        {
+           rocky.nofloor = true; 
+        }
+        else
+        {
+          rocky.nofloor = true;
+        }  
+   }       
 }
    
 

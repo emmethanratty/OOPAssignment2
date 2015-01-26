@@ -1,4 +1,5 @@
 
+
 PImage BG;
 PImage SBG;
 PImage TreeI;
@@ -18,10 +19,14 @@ Grass grass = new Grass(gHeight);
 Mountain mountain = new Mountain(gHeight);
 Start start = new Start();
 
+ArrayList<Player> players = new ArrayList<Player>();
+boolean[] keys = new boolean[526];
+
 
 void setup()
 {
    size(1000,600); 
+   setUpPlayerControllers();
    
    counter=0.0;
    SBG = loadImage("Volcano.png");
@@ -51,6 +56,8 @@ void draw()
       smooth();
       stroke(255);
       
+     
+      
       
         image(MountainI,mountain.mountainX,gHeight - mountain.mountainH,mountain.mountainW,mountain.mountainH);
       
@@ -61,17 +68,26 @@ void draw()
       
        counter+=rocky.rollspeed;
     
-       translate(rocky.rockyX, rocky.rockyY);
-       rotate(counter*TWO_PI/360);
-       translate(-rocky.rockyW/2, -rocky.rockyW/2);
-       
-      image(RockyEye,0,0,rocky.rockyW,rocky.rockyH);  
+        
       
       
       rocky.run();
       tree.run();
       grass.run();
       mountain.run();
+      
+      for(Player player:players)
+      {
+        player.update();
+        player.display();
+        player.gravity();
+      }
+      
+      //translate(p.pos.x, p.pos.y);
+      // rotate(counter*TWO_PI/360);
+      // translate(-rocky.rockyW/2, -rocky.rockyW/2);
+       
+      image(RockyEye,0,0,rocky.rockyW,rocky.rockyH); 
       
       break;
     }
@@ -83,6 +99,9 @@ void draw()
 
 void keyPressed()
 {
+  
+   keys[keyCode] = true;
+   
    if (keyCode == ' ')
    { 
        if(option == '1')
@@ -113,6 +132,58 @@ void keyPressed()
          
        }
    }       
+}
+void keyReleased()
+{
+  keys[keyCode] = false;
+}
+
+boolean checkKey(char theKey)
+{
+  return keys[Character.toUpperCase(theKey)];
+}
+
+char buttonNameToKey(XML xml, String buttonName)
+{
+  String value =  xml.getChild(buttonName).getContent();
+  if ("LEFT".equalsIgnoreCase(value))
+  {
+    return LEFT;
+  }
+  if ("RIGHT".equalsIgnoreCase(value))
+  {
+    return RIGHT;
+  }
+  if ("UP".equalsIgnoreCase(value))
+  {
+    return UP;
+  }
+  if ("DOWN".equalsIgnoreCase(value))
+  {
+    return DOWN;
+  }
+  //.. Others to follow
+  return value.charAt(0);  
+}
+
+void setUpPlayerControllers()
+{
+  XML xml = loadXML("arcade.xml");
+  XML[] children = xml.getChildren("player");
+  int gap = width / (children.length + 1);
+  
+  for(int i = 0 ; i < children.length ; i ++)  
+  {
+    XML playerXML = children[i];
+    Player p = new Player(
+            i
+            , color(random(0, 255), random(0, 255), random(0, 255))
+            , playerXML);
+    int x = (i + 1) * gap;
+    p.pos.x = x;
+    p.pos.y = gHeight - rocky.rockyH/2;;
+   players.add(p);         
+  }
 }
    
 

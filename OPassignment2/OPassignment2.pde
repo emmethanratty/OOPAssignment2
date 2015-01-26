@@ -17,15 +17,17 @@ Rocky rocky = new Rocky(gHeight);
 Tree tree = new Tree(gHeight);
 Grass grass = new Grass(gHeight);
 Mountain mountain = new Mountain(gHeight);
-Start start = new Start();
+Start start;
 
-ArrayList<Player> players = new ArrayList<Player>();
+//ArrayList<Player> players = new ArrayList<Player>();
+Player p;
 boolean[] keys = new boolean[526];
 
 
 void setup()
 {
    size(1000,600); 
+   
    setUpPlayerControllers();
    
    counter=0.0;
@@ -41,7 +43,7 @@ void setup()
 
 void draw()
 {
-  switch(option)
+  switch(p.option)
   {
     case '0':
     {
@@ -64,9 +66,9 @@ void draw()
         image(TreeI,tree.treeX,gHeight-tree.treeH,tree.treeW,tree.treeH);
       
         image(GrassI,grass.grassX,gHeight-grass.grassH,grass.grassW,grass.grassH);
-        image(RockyI,rocky.rockyX - rocky.rockyW/2,rocky.rockyY - rocky.rockyH/2,rocky.rockyW,rocky.rockyH);  
+        //image(RockyI,rocky.rockyX - rocky.rockyW/2,rocky.rockyY - rocky.rockyH/2,rocky.rockyW,rocky.rockyH);  
       
-       counter+=rocky.rollspeed;
+       counter += rocky.rollspeed;
     
         
       
@@ -76,12 +78,10 @@ void draw()
       grass.run();
       mountain.run();
       
-      for(Player player:players)
-      {
-        player.update();
-        player.display();
-        player.gravity();
-      }
+      //for(Player player:players)
+      //{
+        p.run();
+      //}
       
       //translate(p.pos.x, p.pos.y);
       // rotate(counter*TWO_PI/360);
@@ -102,7 +102,7 @@ void keyPressed()
   
    keys[keyCode] = true;
    
-   if (keyCode == ' ')
+   if (key == 'e')
    { 
        if(option == '1')
        {
@@ -123,11 +123,11 @@ void keyPressed()
        {
          if(start.selected == '0')
          {
-           option = '1';
+           p.option = '1';
          }
          if(start.selected == '1')
          {
-            option = '2'; 
+            p.option = '2'; 
          }
          
        }
@@ -135,6 +135,7 @@ void keyPressed()
 }
 void keyReleased()
 {
+  rocky.rollspeed = 10;
   keys[keyCode] = false;
 }
 
@@ -169,21 +170,10 @@ char buttonNameToKey(XML xml, String buttonName)
 void setUpPlayerControllers()
 {
   XML xml = loadXML("arcade.xml");
-  XML[] children = xml.getChildren("player");
-  int gap = width / (children.length + 1);
+  XML playerXML = xml.getChild("player");
   
-  for(int i = 0 ; i < children.length ; i ++)  
-  {
-    XML playerXML = children[i];
-    Player p = new Player(
-            i
-            , color(random(0, 255), random(0, 255), random(0, 255))
-            , playerXML);
-    int x = (i + 1) * gap;
-    p.pos.x = x;
-    p.pos.y = gHeight - rocky.rockyH/2;;
-   players.add(p);         
-  }
+  start = new Start(playerXML);
+  
+  p = new Player( playerXML);
 }
-   
 

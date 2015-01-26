@@ -5,6 +5,14 @@ class Start
   char selected;
   int startS;
   int upgradeS;
+  
+  char up;
+  char down;
+  char left;
+  char right;
+  char start;
+  char button1;
+  char button2;
  
   
   Start()
@@ -14,6 +22,31 @@ class Start
     upgradeS = 155;
   } 
   
+    Start( char up, char down, char left, char right, char start, char button1, char button2)
+  {
+    this();
+    this.up = up;
+    this.down = down;
+    this.left = left;
+    this.right = right;
+    this.start = start;
+    this.button1 = button1;
+    this.button2 = button2;
+  }
+  
+  Start( XML xml)
+  {
+    this(
+          buttonNameToKey(xml, "up")
+        , buttonNameToKey(xml, "down")
+        , buttonNameToKey(xml, "left")
+        , buttonNameToKey(xml, "right")
+        , buttonNameToKey(xml, "start")
+        , buttonNameToKey(xml, "button1")
+        , buttonNameToKey(xml, "button2")
+        );
+  }
+  
   
   
   void run()
@@ -21,7 +54,7 @@ class Start
      display();
      buttons();
      selected(); 
-     keyPressed();
+     update();
   }
   void display()
   {
@@ -51,18 +84,48 @@ class Start
       startS = 155;
     }
   }
-  void keyPressed()
+//  void keyPressed()
+//  {
+//   
+//      if (key == 'w')
+//      {  
+//        selected = '0';
+//      }
+//      if (key == 's')
+//      {  
+//        selected = '1';
+//      }
+//  }
+  
+  void update()
   {
-    if(key == CODED)
+    if (checkKey(up))
     {
-      if (keyCode == UP)
-      {  
-        selected = '0';
-      }
-      if (keyCode == DOWN)
-      {  
-        selected = '1';
-      }
+      selected = '0';
     }
+    if (checkKey(down))
+    {
+      selected = '1';
+    }
+//    if (checkKey(left))
+//    {
+//      pos.x -= 1;
+//    }    
+//    if (checkKey(right))
+//    {
+//      pos.x += 1;
+//    }
+//    if (checkKey(start))
+//    {
+//      println("Player " + index + " start");
+//    }
+    if (checkKey(button1))
+    {
+      println("Player  button 1");
+    }
+//    if (checkKey(button2))
+//    {
+//      println("Player " + index + " butt2");
+//    }    
   }
 }

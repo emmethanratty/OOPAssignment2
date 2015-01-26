@@ -1,4 +1,4 @@
-class Rocky
+/*class Rocky
 {
   boolean nofloor;
   boolean jump;
@@ -44,35 +44,25 @@ class Rocky
    
   void keyPressed()
   {
-   if(key == CODED)
-   {
-      if (keyCode == LEFT)
+   
+      if (key == 'a')
       {   
         if(rockyX > 0)
         {
           rockyX -= 3;
           rollspeed = 5;
         }       
-      }//end left if 
-      if (keyCode == RIGHT)
+      }
+      if (key == 'd')
       {   
         if(rockyX < width)
         {
           rockyX += 3;
           rollspeed = 15;
         }       
-      }//end left if 
-      if (keyCode == DOWN)
-      {   
-        if(rockyX < width)
-        {
-          rollspeed = 10;
-        }       
-      }//end left if 
-   }
-   
-    
+      } 
   }
-}    //end left if 
+}
+*/
 
 

@@ -13,7 +13,7 @@ float i = 0;
 float counter;
 char option = '0';
 
-Rocky rocky = new Rocky(gHeight);
+//Rocky rocky = new Rocky(gHeight);
 Tree tree = new Tree(gHeight);
 Grass grass = new Grass(gHeight);
 Mountain mountain = new Mountain(gHeight);
@@ -68,12 +68,12 @@ void draw()
         image(GrassI,grass.grassX,gHeight-grass.grassH,grass.grassW,grass.grassH);
         //image(RockyI,rocky.rockyX - rocky.rockyW/2,rocky.rockyY - rocky.rockyH/2,rocky.rockyW,rocky.rockyH);  
       
-       counter += rocky.rollspeed;
+       //counter += rocky.rollspeed;
     
         
       
       
-      rocky.run();
+     // rocky.run();
       tree.run();
       grass.run();
       mountain.run();
@@ -87,7 +87,7 @@ void draw()
       // rotate(counter*TWO_PI/360);
       // translate(-rocky.rockyW/2, -rocky.rockyW/2);
        
-      image(RockyEye,0,0,rocky.rockyW,rocky.rockyH); 
+      //image(RockyEye,0,0,rocky.rockyW,rocky.rockyH); 
       
       break;
     }
@@ -104,21 +104,6 @@ void keyPressed()
    
    if (key == 'e')
    { 
-       if(option == '1')
-       {
-        if(rocky.rockyY > rocky.jumpH)
-        {  
-           rocky.rockyY -= 5;
-        } 
-        else if(rocky.rockyY < gHeight)
-        {
-           rocky.nofloor = true; 
-        }
-        else
-        {
-          rocky.nofloor = true;
-        } 
-       }
        if(option == '0')
        {
          if(start.selected == '0')
@@ -135,7 +120,6 @@ void keyPressed()
 }
 void keyReleased()
 {
-  rocky.rollspeed = 10;
   keys[keyCode] = false;
 }
 

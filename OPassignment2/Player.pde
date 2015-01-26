@@ -130,9 +130,11 @@ class Player
        
      rotate(counter*TWO_PI/360);
      
-     translate(-rocky.rockyW/2, -rocky.rockyW/2);
+     translate(-rockyW/2, -rockyW/2);
        
-     image(RockyEye,0,0,rocky.rockyW,rocky.rockyH);
+     image(RockyEye,0,0,rockyW,rockyH);
+     
+     counter += rollspeed;
   } 
  
   void gravity()

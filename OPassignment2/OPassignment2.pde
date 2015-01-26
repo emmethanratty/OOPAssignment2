@@ -18,9 +18,9 @@ Tree tree = new Tree(gHeight);
 Grass grass = new Grass(gHeight);
 Mountain mountain = new Mountain(gHeight);
 Start start;
-
-//ArrayList<Player> players = new ArrayList<Player>();
+Upgrade upgrade;
 Player p;
+
 boolean[] keys = new boolean[526];
 
 
@@ -80,7 +80,7 @@ void draw()
       
       //for(Player player:players)
       //{
-        p.run();
+      p.run();
       //}
       
       //translate(p.pos.x, p.pos.y);
@@ -89,10 +89,15 @@ void draw()
        
       //image(RockyEye,0,0,rocky.rockyW,rocky.rockyH); 
       
+      
       break;
     }
     case '2':
     {
+      background(0);
+      upgrade.run();
+      
+      break;
     }
   }
 }
@@ -102,21 +107,21 @@ void keyPressed()
   
    keys[keyCode] = true;
    
-   if (key == 'e')
-   { 
-       if(option == '0')
-       {
-         if(start.selected == '0')
-         {
-           p.option = '1';
-         }
-         if(start.selected == '1')
-         {
-            p.option = '2'; 
-         }
-         
-       }
-   }       
+//   if (key == 'e')
+//   { 
+//       if(option == '0')
+//       {
+//         if(start.selected == '0')
+//         {
+//           p.option = '1';
+//         }
+//         if(start.selected == '1')
+//         {
+//            p.option = '2'; 
+//         }
+//         
+//       }
+//   }       
 }
 void keyReleased()
 {
@@ -156,7 +161,10 @@ void setUpPlayerControllers()
   XML xml = loadXML("arcade.xml");
   XML playerXML = xml.getChild("player");
   
+  
+  
   start = new Start(playerXML);
+  upgrade = new Upgrade(playerXML);
   
   p = new Player( playerXML);
 }

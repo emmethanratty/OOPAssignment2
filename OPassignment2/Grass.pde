@@ -4,6 +4,7 @@ class Grass
   float grassH = random(2,10);
   float grassW = 5;
   float grassX = random(0,1000);
+  float Gacc = 4;
   
   
    Grass(int gHeight)
@@ -19,7 +20,8 @@ class Grass
   
   void move()
   {
-     grassX -= 4; 
+     grassX -= Gacc; 
+     Gacc = Gacc*(p.acc/100);
   }
   
   void reset()

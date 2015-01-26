@@ -4,6 +4,7 @@ class Tree
   float treeH = random(200,350);
   float treeW = random(150,250);
   float treeX = random(0,1000);
+  float Tacc = 4;
   
   Tree(int gHeight)
   {
@@ -18,7 +19,7 @@ class Tree
   
   void move()
   {
-     treeX -= 4; 
+     treeX -= Tacc*(p.acc/100); 
   }
   void reset()
   {
@@ -28,6 +29,7 @@ class Tree
        treeH = random(200,350);
        treeW = random(150,250);
      } 
+     
   }
   
   

@@ -2,7 +2,7 @@ class Start
 {
   String title = "Rock Run";
   PFont font = createFont("Adobe Caslon Pro", 40);
-  char selected;
+  int selected = 0;
   int startS;
   int upgradeS;
   
@@ -17,7 +17,7 @@ class Start
   
   Start()
   {
-    selected = '0';
+    
     startS = 155;
     upgradeS = 155;
   } 
@@ -122,6 +122,17 @@ class Start
     if (checkKey(button1))
     {
       println("Player  button 1");
+      if(option == '0')
+      {
+          if(selected == '0')
+         {
+           p.option = '1';
+         }
+         if(selected == '1')
+         {
+            p.option = '2'; 
+         }
+      }
     }
 //    if (checkKey(button2))
 //    {

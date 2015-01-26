@@ -21,7 +21,10 @@ class Player
   float gravityF = 5;
   float rockyISize;
   float jumpH = 300;
-  float rollspeed = 10;
+  float rollspeed = 4;
+  float distance = 0;
+  float Cacc = 300f;
+  float acc = Cacc;
   
   char option = '0';
     
@@ -62,6 +65,7 @@ class Player
      update();
     display();
     gravity(); 
+    stopped();
   }
   
   
@@ -101,12 +105,22 @@ class Player
     if (checkKey(left))
     {
       pos.x -= 3;
-      rollspeed = 5;
+      rollspeed = 2 *(acc/100);
+      distance -= .1f;
+    }
+    else
+    {
+      rollspeed = 4*(acc/100);
     }    
     if (checkKey(right))
     {
       pos.x += 3;
-      rollspeed = 15;
+      rollspeed = 6*(acc/100);
+      distance += .1f;
+    }
+     else
+    {
+      rollspeed = 4*(acc/100);
     }
     if (checkKey(start))
     {
@@ -115,6 +129,7 @@ class Player
     if (checkKey(button1))
     {
       println("Player button 1");
+      
     }
     if (checkKey(button2))
     {
@@ -124,6 +139,7 @@ class Player
   
   void display()
   { 
+    text(distance,30,100);
     
      image(RockyI,pos.x - rockyW/2,pos.y -rockyH/2,rockyW,rockyH);      
      translate(pos.x, pos.y);
@@ -134,7 +150,9 @@ class Player
        
      image(RockyEye,0,0,rockyW,rockyH);
      
-     counter += rollspeed;
+     counter += rollspeed *(acc/100);
+     
+     
   } 
  
   void gravity()
@@ -150,5 +168,23 @@ class Player
        nofloor = false;
      }
      
+   }
+   
+   void stopped()
+   {
+     if(option == '1')
+     {
+       distance+= .2f*(acc/100);
+       acc -= .1f;
+       
+       if( acc < 0)
+       {
+          option = '0';
+         distance= 0f;
+         acc = Cacc; 
+       }
+       
+       println(acc);
+     }
    }
 }

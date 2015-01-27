@@ -20,8 +20,7 @@ class Grass
   
   void move()
   {
-     grassX -= Gacc; 
-     Gacc = Gacc*(p.acc/100);
+     grassX -= Gacc *(p.acc/100);
   }
   
   void reset()

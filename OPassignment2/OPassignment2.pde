@@ -1,5 +1,4 @@
 
-
 PImage BG;
 PImage SBG;
 PImage TreeI;
@@ -17,6 +16,9 @@ char option = '0';
 Tree tree = new Tree(gHeight);
 Grass grass = new Grass(gHeight);
 Mountain mountain = new Mountain(gHeight);
+Fall fall = new Fall();
+Magma magma = new Magma();
+Gameover gameover;
 Start start;
 Upgrade upgrade;
 Player p;
@@ -57,26 +59,22 @@ void draw()
       background(BG);
       smooth();
       stroke(255);
-      
-     
-      
-      
-        image(MountainI,mountain.mountainX,gHeight - mountain.mountainH,mountain.mountainW,mountain.mountainH);
-      
-        image(TreeI,tree.treeX,gHeight-tree.treeH,tree.treeW,tree.treeH);
-      
-        image(GrassI,grass.grassX,gHeight-grass.grassH,grass.grassW,grass.grassH);
-        //image(RockyI,rocky.rockyX - rocky.rockyW/2,rocky.rockyY - rocky.rockyH/2,rocky.rockyW,rocky.rockyH);  
-      
-       //counter += rocky.rollspeed;
-    
         
+      image(MountainI,mountain.mountainX,gHeight - mountain.mountainH,mountain.mountainW,mountain.mountainH);
       
+      image(TreeI,tree.treeX,gHeight-tree.treeH,tree.treeW,tree.treeH);
       
+      image(GrassI,grass.grassX,gHeight-grass.grassH,grass.grassW,grass.grassH);
+      //image(RockyI,rocky.rockyX - rocky.rockyW/2,rocky.rockyY - rocky.rockyH/2,rocky.rockyW,rocky.rockyH);  
+      
+     //counter += rocky.rollspeed;
      // rocky.run();
       tree.run();
       grass.run();
       mountain.run();
+      fall.run();
+      magma.run();
+      hitbox();
       
       //for(Player player:players)
       //{
@@ -86,10 +84,7 @@ void draw()
       //translate(p.pos.x, p.pos.y);
       // rotate(counter*TWO_PI/360);
       // translate(-rocky.rockyW/2, -rocky.rockyW/2);
-       
-      //image(RockyEye,0,0,rocky.rockyW,rocky.rockyH); 
-      
-      
+      //image(RockyEye,0,0,rocky.rockyW,rocky.rockyH);             
       break;
     }
     case '2':
@@ -98,6 +93,13 @@ void draw()
       upgrade.run();
       
       break;
+    }
+    case '3':
+    {
+      background(0);
+      gameover.run();
+      
+       break; 
     }
   }
 }
@@ -162,10 +164,21 @@ void setUpPlayerControllers()
   XML playerXML = xml.getChild("player");
   
   
-  
+  gameover = new Gameover(playerXML);
   start = new Start(playerXML);
   upgrade = new Upgrade(playerXML);
   
   p = new Player( playerXML);
+}
+
+void hitbox()
+{
+   if(dist(p.pos.x,p.pos.y,magma.magmaX,magma.magmaY) <= p.rockyH) 
+     {
+        magma.magmaX = random(1000,1500);
+        magma.magmaY = random(50,458);
+        p.acc = p.acc + 20;
+     }
+     println(dist(p.pos.x,p.pos.y,magma.magmaX,magma.magmaY));
 }
 

@@ -124,16 +124,16 @@ class Player
     }
     if (checkKey(start))
     {
-      println("Player start");
+      //println("Player start");
     }
     if (checkKey(button1))
     {
-      println("Player button 1");
+      //println("Player button 1");
       
     }
     if (checkKey(button2))
     {
-      println("Player butt2");
+     // println("Player butt2");
     }    
   }
   
@@ -158,7 +158,7 @@ class Player
   void gravity()
    {
      
-     println(pos.y - rockyH/2);
+     //println(pos.y - rockyH/2);
      if(nofloor)
      {
         pos.y += gravityF; 
@@ -177,14 +177,14 @@ class Player
        distance+= .2f*(acc/100);
        acc -= .1f;
        
-       if( acc < 0)
+       if( acc < 0 )
        {
-          option = '0';
+          option = '3';
          distance= 0f;
          acc = Cacc; 
        }
        
-       println(acc);
+       //println(acc);
      }
    }
 }

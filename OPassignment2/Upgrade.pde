@@ -53,13 +53,13 @@ class Upgrade
   void display()
   {
      fill(button11);     
-     rect(10,10,10,10);
+     rect(width/2,10,10,10);
      fill(button22);
-     rect(10,20,10,10);
+     rect(width/2,height-20,10,10);
      fill(button3);
-     rect(20,10,10,10);
+     rect(10,height/2,10,10);
      fill(button4);
-     rect(20,20,10,10); 
+     rect(width-20,height/2,10,10); 
   }
   
   void update()

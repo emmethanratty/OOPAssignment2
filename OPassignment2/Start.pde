@@ -62,7 +62,8 @@ class Start
      fill(#8787A3);
      stroke(0);
      text("Rocky Run!", width/2 - 105, height/4);
-     println(selected);
+     text(gameover.magmaP, 500, 500);
+     //println(selected);
   }
   void buttons()
   {
@@ -121,7 +122,7 @@ class Start
 //    }
     if (checkKey(button1))
     {
-      println("Player  button 1");
+     // println("Player  button 1");
       if(option == '0')
       {
           if(selected == '0')

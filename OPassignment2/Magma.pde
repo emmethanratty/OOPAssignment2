@@ -6,6 +6,7 @@ class Magma
   float magmaX;
   float magmaY;
   float Macc = 4;
+  float frequency = 1500;
    
   Magma()
   {
@@ -40,7 +41,7 @@ class Magma
   {
      if(magmaX < 0 - magmaW)
      {
-        magmaX = random(1000,1500);
+        magmaX = random(1000,frequency);
         magmaY = random(50,458);
      }
   }

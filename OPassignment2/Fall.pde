@@ -60,6 +60,7 @@ class Fall
            p.acc = 300;
            fallX = random(1500,2500);
            p.nofloor = false;
+           p.Gdis = p.distance;
            p.distance = 0;
         }
       }

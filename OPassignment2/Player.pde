@@ -13,6 +13,7 @@ class Player
   boolean nojump;
   
   int gHeight = 458;
+  int moveS = 3;
   
   float rockyH = 100;
   float rockyW = 100;
@@ -20,11 +21,13 @@ class Player
   float rockyY;
   float gravityF = 5;
   float rockyISize;
-  float jumpH = 300;
+  float currentJH = 300;
+  float jumpH = currentJH;
   float rollspeed = 4;
   float distance = 0;
   float Cacc = 300f;
   float acc = Cacc;
+  float Gdis;
   
   char option = '0';
     
@@ -66,6 +69,8 @@ class Player
     display();
     gravity(); 
     stopped();
+    
+    jumpH = currentJH;
   }
   
   
@@ -104,7 +109,7 @@ class Player
     */
     if (checkKey(left))
     {
-      pos.x -= 3;
+      pos.x -= moveS;
       rollspeed = 2 *(acc/100);
       distance -= .1f;
     }
@@ -114,7 +119,7 @@ class Player
     }    
     if (checkKey(right))
     {
-      pos.x += 3;
+      pos.x += moveS;
       rollspeed = 6*(acc/100);
       distance += .1f;
     }
@@ -180,6 +185,7 @@ class Player
        if( acc < 0 )
        {
           option = '3';
+         Gdis = distance;
          distance= 0f;
          acc = Cacc; 
        }

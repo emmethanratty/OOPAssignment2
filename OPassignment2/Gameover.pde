@@ -1,7 +1,5 @@
 class Gameover
 {
-  float magmaP;
-  
   char up;
   char down;
   char left;
@@ -10,12 +8,17 @@ class Gameover
   char button1;
   char button2;
   
+  float magmaP;
+  float magmaT;
+  int counter = 0;
+     
   Gameover()
   {
-     magmaP = 0f;
-  } 
+    magmaP = 0;
+    magmaT = 0;
+  }
   
-  Gameover( char up, char down, char left, char right, char start, char button1, char button2)
+  Gameover(char up, char down, char left, char right, char start, char button1, char button2)
   {
     this();
     this.up = up;
@@ -29,7 +32,8 @@ class Gameover
   
   Gameover(XML xml)
   {
-    this( buttonNameToKey(xml, "up")
+    this(
+          buttonNameToKey(xml, "up")
         , buttonNameToKey(xml, "down")
         , buttonNameToKey(xml, "left")
         , buttonNameToKey(xml, "right")
@@ -41,12 +45,25 @@ class Gameover
   
   void run()
   {
-    magmaP = p.distance/100;
-    update();
+     update(); 
+     magmaP();
+     println(magmaP);
+     println(magmaT);
+     
   }
-}
-
- void update()
+  
+  void magmaP()
+  {
+    counter++;
+    if(counter == 1)
+    {
+      magmaP = p.Gdis/100;
+      magmaT = magmaT + magmaP;
+      
+    } 
+  }
+  
+  void update()
   {
 //    if (checkKey(up))
 //    {
@@ -70,10 +87,12 @@ class Gameover
 //    }
     if (checkKey(button1))
     {
-      
+      p.option = '0';
     }
-//    if (checkKey(button2))
-//    {
-//      println("Player " + index + " butt2");
-//    }    
+    if (checkKey(button2))
+    {
+      p.option = '0';
+    }   
   }
+  
+}

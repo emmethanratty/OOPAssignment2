@@ -1,3 +1,12 @@
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
+Minim minim;
+AudioPlayer music;
 
 PImage BG;
 PImage SBG;
@@ -13,9 +22,10 @@ float counter;
 char option = '0';
 
 //Rocky rocky = new Rocky(gHeight);
-Tree tree = new Tree(gHeight);
-Grass grass = new Grass(gHeight);
-Mountain mountain = new Mountain(gHeight);
+ArrayList<Tree> tree = new ArrayList<Tree>(gHeight);
+ArrayList<Grass> grass = new ArrayList<Grass>(gHeight);
+ArrayList<Mountain> mountain = new ArrayList<Mountain>(gHeight);
+//Mountain mountain = new Mountain(gHeight);
 Fall fall = new Fall();
 Magma magma = new Magma();
 Gameover gameover;
@@ -28,7 +38,13 @@ boolean[] keys = new boolean[526];
 
 void setup()
 {
-   size(1000,600); 
+   size(1000,600);
+  
+   minim = new Minim(this);
+   music = minim.loadFile("music.mp3");
+  
+   
+   music.loop();
    
    setUpPlayerControllers();
    
@@ -41,6 +57,19 @@ void setup()
    RockyI = loadImage("rsz_rockyv3.png");
    RockyEye = loadImage("rsz_1rockyeye.png");
    
+   for(int i = 0; i < 150; i++)
+   {
+     grass.add(new Grass(gHeight));
+   }
+   for(int i = 0; i < 5; i++)
+   {
+     mountain.add(new Mountain(gHeight));
+   }
+   for(int i = 0; i < 5; i++)
+   {
+     tree.add(new Tree(gHeight));
+   }
+   
 }  
 
 void draw()
@@ -52,6 +81,7 @@ void draw()
       background(SBG);
       start.run();
       
+      
       break;
     }
     case '1':
@@ -59,19 +89,37 @@ void draw()
       background(BG);
       smooth();
       stroke(255);
-        
-      image(MountainI,mountain.mountainX,gHeight - mountain.mountainH,mountain.mountainW,mountain.mountainH);
+      gameover.counter = 0;
       
-      image(TreeI,tree.treeX,gHeight-tree.treeH,tree.treeW,tree.treeH);
-      
-      image(GrassI,grass.grassX,gHeight-grass.grassH,grass.grassW,grass.grassH);
+      for(int i = 0; i < mountain.size(); i++)
+      {  
+        image(MountainI,mountain.get(i).mountainX,gHeight - mountain.get(i).mountainH,mountain.get(i).mountainW,mountain.get(i).mountainH);
+      }
+      for( int i = 0; i < tree.size(); i++)
+      {
+        image(TreeI,tree.get(i).treeX,gHeight-tree.get(i).treeH,tree.get(i).treeW,tree.get(i).treeH);
+      }
+      for(int i = 0; i < grass.size(); i++)
+      {
+        image(GrassI,grass.get(i).grassX,gHeight-grass.get(i).grassH,grass.get(i).grassW,grass.get(i).grassH);
+      }
       //image(RockyI,rocky.rockyX - rocky.rockyW/2,rocky.rockyY - rocky.rockyH/2,rocky.rockyW,rocky.rockyH);  
       
      //counter += rocky.rollspeed;
      // rocky.run();
-      tree.run();
-      grass.run();
-      mountain.run();
+     for (Tree branch : tree) 
+      {
+        branch.run();
+      }
+      for (Grass blade : grass) 
+      {
+        blade.run();
+      }
+      for (Mountain rock : mountain) 
+      {
+        rock.run();
+      }
+     
       fall.run();
       magma.run();
       hitbox();
@@ -173,7 +221,7 @@ void setUpPlayerControllers()
 
 void hitbox()
 {
-   if(dist(p.pos.x,p.pos.y,magma.magmaX,magma.magmaY) <= p.rockyH) 
+   if(dist(p.pos.x,p.pos.y,magma.magmaX,magma.magmaY) <= p.rockyH - magma.magmaH) 
      {
         magma.magmaX = random(1000,1500);
         magma.magmaY = random(50,458);
@@ -181,4 +229,5 @@ void hitbox()
      }
      println(dist(p.pos.x,p.pos.y,magma.magmaX,magma.magmaY));
 }
+
 

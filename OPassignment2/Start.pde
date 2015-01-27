@@ -62,7 +62,7 @@ class Start
      fill(#8787A3);
      stroke(0);
      text("Rocky Run!", width/2 - 105, height/4);
-     text(gameover.magmaP, 500, 500);
+     text(gameover.magmaT, 500, 500);
      //println(selected);
   }
   void buttons()

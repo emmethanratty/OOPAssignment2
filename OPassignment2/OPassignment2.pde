@@ -15,19 +15,20 @@ PImage MountainI;
 PImage GrassI;
 PImage RockyI;
 PImage RockyEye;
+PImage MagmaCore;
 
 int gHeight = 458;
 float i = 0;
 float counter;
 char option = '0';
 
-//Rocky rocky = new Rocky(gHeight);
 ArrayList<Tree> tree = new ArrayList<Tree>(gHeight);
 ArrayList<Grass> grass = new ArrayList<Grass>(gHeight);
 ArrayList<Mountain> mountain = new ArrayList<Mountain>(gHeight);
-//Mountain mountain = new Mountain(gHeight);
-Fall fall = new Fall();
-Magma magma = new Magma();
+
+GameObjects[] gameObjects;
+
+Magma magma;
 Gameover gameover;
 Start start;
 Upgrade upgrade;
@@ -42,9 +43,12 @@ void setup()
   
    minim = new Minim(this);
    music = minim.loadFile("music.mp3");
-  
-   
    music.loop();
+   
+   gameObjects =new GameObjects[1];
+   
+   gameObjects[0] = new Fall();
+   magma = new Magma();
    
    setUpPlayerControllers();
    
@@ -56,8 +60,9 @@ void setup()
    GrassI = loadImage("grass.png");
    RockyI = loadImage("rsz_rockyv3.png");
    RockyEye = loadImage("rsz_1rockyeye.png");
+   MagmaCore = loadImage("magmacore.png");
    
-   for(int i = 0; i < 150; i++)
+   for(int i = 0; i < 100; i++)
    {
      grass.add(new Grass(gHeight));
    }
@@ -79,8 +84,7 @@ void draw()
     case '0':
     {
       background(SBG);
-      start.run();
-      
+      start.run(); 
       
       break;
     }
@@ -103,7 +107,7 @@ void draw()
       {
         image(GrassI,grass.get(i).grassX,gHeight-grass.get(i).grassH,grass.get(i).grassW,grass.get(i).grassH);
       }
-      //image(RockyI,rocky.rockyX - rocky.rockyW/2,rocky.rockyY - rocky.rockyH/2,rocky.rockyW,rocky.rockyH);  
+      image(MagmaCore,magma.magmaX,magma.magmaY,magma.magmaW,magma.magmaH);  
       
      //counter += rocky.rollspeed;
      // rocky.run();
@@ -120,7 +124,7 @@ void draw()
         rock.run();
       }
      
-      fall.run();
+      gameObjects[0].run();
       magma.run();
       hitbox();
       
@@ -146,6 +150,7 @@ void draw()
     {
       background(0);
       gameover.run();
+      p.falling = false;
       
        break; 
     }

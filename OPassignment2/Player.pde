@@ -11,6 +11,7 @@ class Player
   
   boolean nofloor;
   boolean nojump;
+  boolean falling;
   
   int gHeight = 458;
   int moveS = 3;
@@ -109,9 +110,12 @@ class Player
     */
     if (checkKey(left))
     {
-      pos.x -= moveS;
-      rollspeed = 2 *(acc/100);
-      distance -= .1f;
+      if(falling == false)
+      {
+        pos.x -= moveS;
+        rollspeed = 2 *(acc/100);
+        distance -= .1f;
+      }
     }
     else
     {
@@ -119,9 +123,12 @@ class Player
     }    
     if (checkKey(right))
     {
-      pos.x += moveS;
-      rollspeed = 6*(acc/100);
-      distance += .1f;
+      if(falling == false)
+      {
+        pos.x += moveS;
+        rollspeed = 6*(acc/100);
+        distance += .1f;
+      }
     }
      else
     {
@@ -144,7 +151,9 @@ class Player
   
   void display()
   { 
-    text(distance,30,100);
+    textSize(30);
+    text("Distance: " + distance,30,50);
+    text("Acceleration: " + acc,30,100);
     
      image(RockyI,pos.x - rockyW/2,pos.y -rockyH/2,rockyW,rockyH);      
      translate(pos.x, pos.y);

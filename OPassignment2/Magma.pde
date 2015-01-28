@@ -26,10 +26,6 @@ class Magma
   
   void display()
   {
-    fill(255);
-    rect(magmaX,magmaY,magmaW,magmaH);
-   // println(magmaX);
-   // println(magmaY);
   }
   
   void move()

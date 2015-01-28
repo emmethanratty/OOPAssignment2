@@ -62,15 +62,20 @@ class Start
      fill(#8787A3);
      stroke(0);
      text("Rocky Run!", width/2 - 105, height/4);
-     text(gameover.magmaT, 500, 500);
      //println(selected);
   }
   void buttons()
   {
     fill(startS);
-    rect(100,100,100,100);
+    rect(width/2 - 105,height/2 ,200,100);
+    fill(0);
+    textSize(50);
+    text("Start",width/2 - 105,height/2 + 50 );
     fill(upgradeS);
-    rect(100,250,100,100);
+    rect(width/2 - 105,height/2 + 100 ,200,100);
+    fill(0);
+    textSize(50);
+    text("Upgrades",width/2 - 105,height/2 + 150 );
   }
   void selected()
   {
@@ -116,24 +121,24 @@ class Start
 //    {
 //      pos.x += 1;
 //    }
-//    if (checkKey(start))
-//    {
-//      println("Player " + index + " start");
-//    }
+      if (checkKey(start))
+      {
+        if(option == '0')
+        {
+            if(selected == '0')
+           {
+             p.option = '1';
+           }
+           if(selected == '1')
+           {
+              p.option = '2'; 
+           }
+        }
+    }
     if (checkKey(button1))
     {
      // println("Player  button 1");
-      if(option == '0')
-      {
-          if(selected == '0')
-         {
-           p.option = '1';
-         }
-         if(selected == '1')
-         {
-            p.option = '2'; 
-         }
-      }
+      
     }
 //    if (checkKey(button2))
 //    {

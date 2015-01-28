@@ -5,6 +5,7 @@ class Mountain
   float mountainH = random(200,400);
   float mountainW = random(200,400);
   float mountainX = random(0,1000);
+  float Macc = 0.1f;
   
   Mountain(int gHeight)
   {
@@ -19,7 +20,7 @@ class Mountain
   
   void move()
   {
-     mountainX -= .1f;
+     mountainX -= Macc *(p.acc/100);
   }
   
   void reset()

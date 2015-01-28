@@ -1,4 +1,4 @@
-class Fall
+class Fall extends GameObjects
 {
   float gHeight;
   float fallX;
@@ -51,6 +51,7 @@ class Fall
       {
         p.nofloor = true;
         p.acc = 10;
+        p.falling = true;
         
         
         if(p.pos.y > height)

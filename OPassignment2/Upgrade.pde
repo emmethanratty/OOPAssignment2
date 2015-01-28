@@ -8,10 +8,10 @@ class Upgrade
   char button1;
   char button2;
   
-  int button11 = 155;
-  int button22 = 155;
-  int button3 = 155;
-  int button4 = 155;
+  int button11;
+  int button22;
+  int button3;
+  int button4;
   
   float jumpP;
   float accP;
@@ -27,6 +27,11 @@ class Upgrade
     accP = 10;
     magP = 10;
     moveP = 10;
+    
+    button11 = 155;
+    button22 = 155;
+    button3 = 155;
+    button4 = 155;
   }
   
   Upgrade(char up, char down, char left, char right, char start, char button1, char button2)
@@ -55,13 +60,11 @@ class Upgrade
   
   void run()
   {
-     
-//     selected();
      display();
      update(); 
-     //println(selected);
   }
   
+  //displays text and boxes
   void display()
   {
      fill(button11);     
@@ -94,46 +97,9 @@ class Upgrade
     text("Press Button 2 to go back", 0, 550); 
   }
   
-//  void selected()
-//  {
-//     switch(selected)
-//    {
-//       case '0' :
-//       {
-//         button11 = 255;
-//         button22 = 155;
-//         button3 = 155;
-//         button4 = 155;     
-//       }
-//       
-//       case '1' :
-//       {
-//         button11 = 155;
-//         button22 = 255;
-//         button3 = 155;
-//         button4 = 155;   
-//       }
-//       
-//       case '2' :
-//       {
-//          button11 = 155;
-//          button22 = 155;
-//          button3 = 255;
-//          button4 = 155;
-//       }
-//       
-//       case '3' :
-//       {
-//         button11 = 155;
-//         button22 = 155;
-//         button3 = 155;
-//         button4 = 255;   
-//       }
-//    } 
-//   }
-  
   void update()
   {
+    //changes colour depended on what is selected
     if (checkKey(up))
     {
       selected = '0'; 
@@ -166,16 +132,13 @@ class Upgrade
          button3 = 155;
          button4 = 255; 
     }
-    if (checkKey(start))
-    {
-  
-    }
     if (checkKey(button1))
     {
       switch(selected)
       {
         case '0':
         {
+          //if magma power is more then the price upgrades
            if( gameover.magmaT > jumpP)
            {
              p.currentJH -= 10;
@@ -197,6 +160,7 @@ class Upgrade
         }
         case '1':
         {
+          //if magma power is more then the price upgrades
            if( gameover.magmaT > accP)
            {
              p.Cacc += 20;
@@ -218,6 +182,7 @@ class Upgrade
         }
         case '2':
         {
+          //if magma power is more then the price upgrades
           if( gameover.magmaT > magP)
            {
              magma.frequency -= 20;
@@ -239,6 +204,7 @@ class Upgrade
         }
         case '3':
         {
+          //if magma power is more then the price upgrades
           if( gameover.magmaT > moveP)
            {
              p.moveS++;
@@ -260,12 +226,10 @@ class Upgrade
         }      
       }
     }
+    // goes back to main menu
     if (checkKey(button2))
     {
-      //if(option == '2')
-     // {
      p.option = '0';
-     // }
     }    
   }
 }

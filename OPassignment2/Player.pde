@@ -96,27 +96,27 @@ class Player
     {
       if(option == '1')
       {
+        //checks ti make sure player is still on screen
         if(pos.y < gHeight - rockyH/2)
           {        
                nofloor = true;
           } 
       }
     }
-    /*
-    if (checkKey(down))
-    {
-      pos.y += 1;
-    }
-    */
     if (checkKey(left))
     {
       if(falling == false)
       {
-        pos.x -= moveS;
-        rollspeed = 2 *(acc/100);
-        distance -= .1f;
+        //checks ti make sure player is still on screen
+        if(pos.x > 0)
+        {
+          pos.x -= moveS;
+          rollspeed = 2 *(acc/100);
+          distance -= .1f;  
+        }
       }
     }
+    //changes rollspeed back to normal
     else
     {
       rollspeed = 4*(acc/100);
@@ -125,30 +125,22 @@ class Player
     {
       if(falling == false)
       {
-        pos.x += moveS;
-        rollspeed = 6*(acc/100);
-        distance += .1f;
+        if(pos.x < width)
+        {
+          pos.x += moveS;
+          rollspeed = 6*(acc/100);
+          distance += .1f;
+        }
       }
     }
+    //changes rollspeed back to normal
      else
     {
       rollspeed = 4*(acc/100);
-    }
-    if (checkKey(start))
-    {
-      //println("Player start");
-    }
-    if (checkKey(button1))
-    {
-      //println("Player button 1");
-      
-    }
-    if (checkKey(button2))
-    {
-     // println("Player butt2");
-    }    
+    }   
   }
-  
+
+  //displays text and images  
   void display()
   { 
     textSize(30);
@@ -165,14 +157,11 @@ class Player
      image(RockyEye,0,0,rockyW,rockyH);
      
      counter += rollspeed *(acc/100);
-     
-     
   } 
  
+  //makes gravity
   void gravity()
-   {
-     
-     //println(pos.y - rockyH/2);
+  {
      if(nofloor)
      {
         pos.y += gravityF; 
@@ -180,17 +169,17 @@ class Player
      if(pos.y == gHeight - rockyH/2)
      {
        nofloor = false;
-     }
-     
+     }   
    }
    
+   //when stopped
    void stopped()
    {
      if(option == '1')
      {
        distance+= .2f*(acc/100);
        acc -= .1f;
-       
+       // checks to see if stopped
        if( acc < 0 )
        {
           option = '3';
@@ -198,8 +187,6 @@ class Player
          distance= 0f;
          acc = Cacc; 
        }
-       
-       //println(acc);
      }
    }
 }

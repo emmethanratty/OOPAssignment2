@@ -2,7 +2,7 @@ class Start
 {
   String title = "Rock Run";
   PFont font = createFont("Adobe Caslon Pro", 40);
-  int selected = 0;
+  int selected;
   int startS;
   int upgradeS;
   
@@ -17,7 +17,7 @@ class Start
   
   Start()
   {
-    
+    selected = 0;
     startS = 155;
     upgradeS = 155;
   } 
@@ -47,8 +47,6 @@ class Start
         );
   }
   
-  
-  
   void run()
   {
      display();
@@ -56,6 +54,8 @@ class Start
      selected(); 
      update();
   }
+  
+  //displays text
   void display()
   {
     textFont(font, 100);
@@ -66,6 +66,8 @@ class Start
      text("Help Rocky return to his home in the volcano", width/2 - 105, height/4 + 40);
      //println(selected);
   }
+  
+  //displays buttons
   void buttons()
   {
     fill(startS);
@@ -79,6 +81,8 @@ class Start
     textSize(50);
     text("Upgrades",width/2 - 105,height/2 + 150 );
   }
+  
+  //shows which are selected
   void selected()
   {
     if(selected == '0')
@@ -92,18 +96,6 @@ class Start
       startS = 155;
     }
   }
-//  void keyPressed()
-//  {
-//   
-//      if (key == 'w')
-//      {  
-//        selected = '0';
-//      }
-//      if (key == 's')
-//      {  
-//        selected = '1';
-//      }
-//  }
   
   void update()
   {
@@ -115,36 +107,19 @@ class Start
     {
       selected = '1';
     }
-//    if (checkKey(left))
-//    {
-//      pos.x -= 1;
-//    }    
-//    if (checkKey(right))
-//    {
-//      pos.x += 1;
-//    }
-      if (checkKey(start))
-      {
-        if(option == '0')
-        {
-            if(selected == '0')
-           {
-             p.option = '1';
-           }
-           if(selected == '1')
-           {
-              p.option = '2'; 
-           }
-        }
-    }
-    if (checkKey(button1))
+    if (checkKey(start))
     {
-     // println("Player  button 1");
-      
+      if(option == '0')
+      {
+         if(selected == '0')
+         {
+           p.option = '1';
+         }
+         if(selected == '1')
+         {
+            p.option = '2'; 
+         }
+      }
     }
-//    if (checkKey(button2))
-//    {
-//      println("Player " + index + " butt2");
-//    }    
   }
 }

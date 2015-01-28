@@ -1,14 +1,18 @@
 class Tree
 {
   int gHeight;
-  float treeH = random(200,350);
-  float treeW = random(150,250);
-  float treeX = random(0,1000);
-  float Tacc = 4;
+  float treeH;
+  float treeW;
+  float treeX;
+  float Tacc;
   
   Tree(int gHeight)
   {
-     this.gHeight = gHeight;
+    this.gHeight = gHeight;
+    treeH = random(200,350);
+    treeW = random(150,250);
+    treeX = random(0,1000);
+    Tacc = 4;
   } 
   
   void run()
@@ -17,10 +21,13 @@ class Tree
     reset();
   }
   
+  //moves tree
   void move()
   {
      treeX -= Tacc*(p.acc/100); 
   }
+  
+  //resets tree
   void reset()
   {
      if(treeX < 0 - treeW)
@@ -28,8 +35,7 @@ class Tree
        treeX = random (1000,1500);
        treeH = random(200,350);
        treeW = random(150,250);
-     } 
-     
+     }  
   }
   
   

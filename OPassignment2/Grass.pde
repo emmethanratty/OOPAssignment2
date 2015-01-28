@@ -2,14 +2,15 @@ class Grass
 {
   int gHeight;
   float grassH = random(2,10);
-  float grassW = 5;
+  float grassW;
   float grassX = random(0,1000);
-  float Gacc = 4;
-  
-  
+  float Gacc;
+   
    Grass(int gHeight)
   {
-     this.gHeight = gHeight;
+    grassW = 5;
+    Gacc = 4;
+    this.gHeight = gHeight;
   } 
   
   void run()
@@ -17,12 +18,12 @@ class Grass
      move();
      reset(); 
   }
-  
+  // moves grass
   void move()
   {
      grassX -= Gacc *(p.acc/100);
   }
-  
+  // resets grass
   void reset()
   {
      if(grassX < 0 - grassW)

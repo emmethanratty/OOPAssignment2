@@ -5,11 +5,13 @@ class Magma
   int magmaH;
   float magmaX;
   float magmaY;
-  float Macc = 4;
-  float frequency = 1500;
+  float Macc;
+  float frequency;
    
   Magma()
   {
+    Macc = 4;
+    frequency = 5000;
     magmaW = 30;
     magmaH = 30;
     magmaX = random(500,1000);
@@ -19,25 +21,22 @@ class Magma
   
   void run()
   {
-     display();
      move(); 
      reset();
   }
   
-  void display()
-  {
-  }
-  
+  //moves the core
   void move()
   {
     magmaX -= Macc *(p.acc/100);
   }
   
+  //rsets the core
   void reset()
   {
      if(magmaX < 0 - magmaW)
      {
-        magmaX = random(1000,frequency);
+        magmaX = random(2000,frequency);
         magmaY = random(100  , gHeight - magmaH);
      }
   }

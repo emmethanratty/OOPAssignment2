@@ -78,12 +78,12 @@ class Upgrade
      rect(10,height/2,200,100);
      textSize(20);
      fill(0);
-     text("Magma Cube \n frequency \n Price: " + accP, 10,height/2 + 20 );
+     text("Magma Cube \n frequency \n Price: " + magP, 10,height/2 + 20 );
      fill(button4);
      rect(width-220,height/2,200,100);
      textSize(20);
      fill(0);
-     text("Upgrade Movement \n speed \n Price: " + accP,width-220,height/2 + 20 );
+     text("Upgrade Movement \n speed \n Price: " + moveP,width-220,height/2 + 20 );
     
     fill(255);
     textSize(100);

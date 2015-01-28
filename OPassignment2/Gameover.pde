@@ -8,14 +8,19 @@ class Gameover
   char button1;
   char button2;
   
+  String CHSS;
+  String NHS;
+  
   float magmaP;
   float magmaT;
   int counter = 0;
+  float CHS;
+  float NS;
      
   Gameover()
   {
     magmaP = 0;
-    magmaT = 100;
+    magmaT = 0;
   }
   
   Gameover(char up, char down, char left, char right, char start, char button1, char button2)
@@ -48,7 +53,18 @@ class Gameover
      update(); 
      magmaP();
      display(); 
+     
+     String lines[] = loadStrings("Highscore.txt");
+     //println("there are " + lines.length + " lines");
+
+      String CHSS = lines[0];
+     
+     CHS =  Float.parseFloat(CHSS);
+     text("High Score: " + CHS, 500,500);
+    // println(CHS);
   }
+
+  
   
   void magmaP()
   {
@@ -57,6 +73,19 @@ class Gameover
     {
       magmaP = p.Gdis/100;
       magmaT = magmaT + magmaP;
+      
+      NS = p.Gdis;
+      //println(CHS);
+      //println(NS);
+      
+      if(NS > CHS)
+      {
+         String NHS = Float.toString(NS);
+         String[] list = split(NHS, ' ');
+         saveStrings("Highscore.txt", list);
+         println(list);
+         //println(NHS);
+      }
       
     } 
   }

@@ -38,7 +38,7 @@ class Magma
      if(magmaX < 0 - magmaW)
      {
         magmaX = random(1000,frequency);
-        magmaY = random(50,458);
+        magmaY = random(100  , gHeight - magmaH);
      }
   }
 }

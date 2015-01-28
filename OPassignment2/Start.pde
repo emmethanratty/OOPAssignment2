@@ -62,6 +62,8 @@ class Start
      fill(#8787A3);
      stroke(0);
      text("Rocky Run!", width/2 - 105, height/4);
+     textSize(30);
+     text("Help Rocky return to his home in the volcano", width/2 - 105, height/4 + 40);
      //println(selected);
   }
   void buttons()
